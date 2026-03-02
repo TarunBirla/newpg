@@ -257,12 +257,15 @@ const testimonials = [
           `}
         </style>
       </section>
+       <section>
+        <img src="/img/image.png" className="w-full  object-cover" />
+      </section>
 
      
 
 
 
-<section className="max-w-6xl mx-auto px-6 mt-16 py-5">
+<section className="max-w-6xl mx-auto px-6 mt-10 py-5">
   <div className="text-center  py-5">
     <h1 className="text-4xl md:text-6xl">Projects</h1>
     <p>Building dreams since 2009</p>
