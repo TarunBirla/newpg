@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e5e5e5; /* Light grey track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #999; /* Scrollbar color */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666; /* Darker on hover */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin; /* Make thin */
+  scrollbar-color: #999 #e5e5e5; /* thumb | track */
+}
+
+/* Cursor pointer on scrollbar */
+::-webkit-scrollbar-thumb {
+  cursor: pointer;
+}
+
+body {
+  font-family: "Syne", sans-serif;
+}
