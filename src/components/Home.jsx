@@ -261,10 +261,7 @@ const testimonials = [
         <img src="/img/image.png" className="w-full  object-cover" />
       </section>
 
-     
-
-
-
+    
 <section className="max-w-6xl mx-auto px-6 mt-10 py-5">
   <div className="text-center  py-5">
     <h1 className="text-4xl md:text-6xl">Projects</h1>
@@ -422,8 +419,6 @@ const testimonials = [
  <section className="py-20">
   <div className="max-w-6xl mx-auto px-6">
 
-    
-
     <p className="text-[#98C20C] font-semibold tracking-widest mb-4">
       TESTIMONIALS
     </p>
@@ -432,7 +427,6 @@ const testimonials = [
      Customer Reviews
     </h2>
 
-    {/* Slider */}
     <Swiper
       modules={[Navigation, Pagination]}
       slidesPerView={1}
@@ -483,8 +477,7 @@ const testimonials = [
       ))}
     </Swiper>
 
-    {/* Bottom Controls (NOW CENTER PERFECT) */}
-    <div className="flex justify-center items-center gap-6 mt-12">
+    <div className="flex justify-center items-center gap-6 mt-12 tarun">
 
       <div className="test-prev cursor-pointer text-gray-600 text-2xl">
         ‹
