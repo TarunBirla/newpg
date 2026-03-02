@@ -208,7 +208,7 @@ const testimonials = [
                 <div className="absolute inset-0 bg-black/60"></div>
 
                 <div className="relative z-10 max-w-6xl mx-auto h-full flex items-center justify-center px-6">
-                  <div className="max-w-xl text-white text-center">
+                  {/* <div className="max-w-xl text-white text-center">
                     <h1
                       className="font-[Syne] font-[400] tracking-[0.01em]
         text-[20px] leading-[46px]
@@ -233,7 +233,7 @@ const testimonials = [
                         />
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </SwiperSlide>
@@ -419,13 +419,14 @@ const testimonials = [
  <section className="py-20">
   <div className="max-w-6xl mx-auto px-6">
 
-    {/* Top Text */}
-    <p className="text-[#98C20C] font-semibold tracking-widest mb-3 text-center">
+    
+
+    <p className="text-[#98C20C] font-semibold tracking-widest mb-4">
       TESTIMONIALS
     </p>
 
-    <h2 className="text-4xl md:text-6xl font-semibold text-black mb-14 text-center">
-      Customer Reviews
+    <h2 className="text-4xl md:text-6xl font-semibold text-black mb-16">
+     Customer Reviews
     </h2>
 
     {/* Slider */}
