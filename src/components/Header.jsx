@@ -60,7 +60,7 @@ const Header = () => {
           </NavLink>
 
           <NavLink
-            to="/a"
+            to="/projects"
             className={({ isActive }) =>
               isActive ? "text-[#40BD02]" : "hover:text-[#40BD02]"
             }

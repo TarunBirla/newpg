@@ -12,6 +12,7 @@ import NewUpdate from "./components/NewUpdate";
 import Contactus from "./components/Contactus";
 import NewsDetail from "./components/NewsDetail";
 import Joinus from "./components/Joinus";
+import Projects from "./components/Projects";
 function App() {
   return (
     <BrowserRouter>
@@ -30,6 +31,7 @@ function App() {
         {/* <Route path="/" element={<LandingPage />} /> */}
         <Route path="/" element={<Home />} />
         <Route path="/abouts" element={<Abouts />} />
+        <Route path="/projects" element={<Projects />} />
         <Route path="/business" element={<Besiness />} />
         <Route path="/joinus" element={<Joinus />} />
 
