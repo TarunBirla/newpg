@@ -38,7 +38,7 @@ const Home = () => {
   };
   const [hoverTab, setHoverTab] = useState(null);
 
-  const [slides, setSlider] = useState([]);
+  // const [slides, setSlider] = useState([]);
   const [abouts, setAbouts] = useState([]);
   const [abouts1, setAbouts1] = useState([]);
   const [architech, setArchitech] = useState([]);
@@ -47,6 +47,20 @@ const Home = () => {
   const [active, setActive] = useState(null);
   const [news, setNews] = useState([]);
 
+   const slides = [
+    {
+      image_url: "/Mask group.png", // apni image path
+      title: "Empowering Education, Skills, and Community Growth",
+      description:
+        "A Visionary Integrated Township Project in Sonarpur, West Bengal",
+    },
+    {
+      image_url: "/Mask group.png",
+      title: "Luxury Sky Heights",
+      description:
+        "Experience a new era of luxury living with world-class amenities and prime city connectivity designed for comfort and elegance.",
+    },
+  ];
   const fetchData = async () => {
     try {
       const response = await http.get(`/common`);
@@ -54,7 +68,7 @@ const Home = () => {
       const Alldata = response.data?.data;
       setNews(Alldata?.news || []);
 
-      setSlider(Alldata?.banners);
+      // setSlider(Alldata?.banners);
       setAbouts(Alldata?.about);
       setAbouts1(Alldata?.chairmanmsg[0]);
 
@@ -106,73 +120,73 @@ const Home = () => {
   }, []);
 
   // Show loader until data arrives
-  if (!activeTab) {
-    return <div className="text-center py-10">Loading...</div>;
-  }
+  // if (!activeTab) {
+  //   return <div className="text-center py-10">Loading...</div>;
+  // }
 
   const slide = [
-  {
-    image: "/slide.jpg", // apni image path
-    title: "Kalim Premier Pride",
-    description:
-      "Premier Realty’s brochure showcases our exclusive real estate projects in Kolkata, featuring modern architecture, premium amenities, and sustainable designs. It reflects our commitment to quality, innovation, and trust — offering elegant living and commercial spaces that redefine urban lifestyles in the heart of the city.",
-  },
-  {
-    image: "/slide.jpg",
-    title: "Luxury Sky Heights",
-    description:
-      "Experience a new era of luxury living with world-class amenities and prime city connectivity designed for comfort and elegance.",
-  },
-];
+    {
+      image: "/slide.jpg", // apni image path
+      title: "Kalim Premier Pride",
+      description:
+        "Premier Realty’s brochure showcases our exclusive real estate projects in Kolkata, featuring modern architecture, premium amenities, and sustainable designs. It reflects our commitment to quality, innovation, and trust — offering elegant living and commercial spaces that redefine urban lifestyles in the heart of the city.",
+    },
+    {
+      image: "/slide.jpg",
+      title: "Luxury Sky Heights",
+      description:
+        "Experience a new era of luxury living with world-class amenities and prime city connectivity designed for comfort and elegance.",
+    },
+  ];
 
-const testimonials = [
-  {
-    image: "/t1.png",
+  
 
-    name: "James Pattinson",
-    review:
-      "Lobortis leo pretium facilisis amet nisl at nec. Scelerisque risus tortor donec ipsum consequat semper consequat adipiscing ultrices.",
-    rating: 5,
-  },
-  {
-    image: "/t2.png",
+  const testimonials = [
+    {
+      image: "/t1.png",
 
-    name: "Greg Stuart",
-    review:
-      "Vestibulum, cum nam non amet consectetur morbi aenean condimentum eget. Ultricies integer nunc neque accumsan laoreet.",
-    rating: 5,
-  },
-  {
-    image: "/t3.png",
-    name: "Trevor Mitchell",
-    review:
-      "Ut tristique viverra sed porttitor senectus. A facilisis metus pretium ut habitant lorem. Velit vel bibendum eget aliquet sem nec.",
-    rating: 4,
-  },
-   {
-    image: "/t2.png",
+      name: "James Pattinson",
+      review:
+        "Lobortis leo pretium facilisis amet nisl at nec. Scelerisque risus tortor donec ipsum consequat semper consequat adipiscing ultrices.",
+      rating: 5,
+    },
+    {
+      image: "/t2.png",
 
-    name: "Greg Stuart",
-    review:
-      "Vestibulum, cum nam non amet consectetur morbi aenean condimentum eget. Ultricies integer nunc neque accumsan laoreet.",
-    rating: 5,
-  },
-  {
-    image: "/t3.png",
-    name: "Trevor Mitchell",
-    review:
-      "Ut tristique viverra sed porttitor senectus. A facilisis metus pretium ut habitant lorem. Velit vel bibendum eget aliquet sem nec.",
-    rating: 4,
-  },
-];
+      name: "Greg Stuart",
+      review:
+        "Vestibulum, cum nam non amet consectetur morbi aenean condimentum eget. Ultricies integer nunc neque accumsan laoreet.",
+      rating: 5,
+    },
+    {
+      image: "/t3.png",
+      name: "Trevor Mitchell",
+      review:
+        "Ut tristique viverra sed porttitor senectus. A facilisis metus pretium ut habitant lorem. Velit vel bibendum eget aliquet sem nec.",
+      rating: 4,
+    },
+    {
+      image: "/t2.png",
 
+      name: "Greg Stuart",
+      review:
+        "Vestibulum, cum nam non amet consectetur morbi aenean condimentum eget. Ultricies integer nunc neque accumsan laoreet.",
+      rating: 5,
+    },
+    {
+      image: "/t3.png",
+      name: "Trevor Mitchell",
+      review:
+        "Ut tristique viverra sed porttitor senectus. A facilisis metus pretium ut habitant lorem. Velit vel bibendum eget aliquet sem nec.",
+      rating: 4,
+    },
+  ];
 
   return (
     <>
       <Header />
 
-      <section className="relative w-full  h-[50vh] sm:h-[80vh] md:h-[90vh] ">
-        {/* MAIN SWIPER */}
+      {/* <section className="relative w-full  h-[50vh] sm:h-[80vh] md:h-[90vh] ">
         <Swiper
           modules={[Navigation, Pagination, Thumbs, Controller, Autoplay]}
           navigation={false}
@@ -194,8 +208,6 @@ const testimonials = [
           }}
           speed={900}
           onSwiper={(swiper) => (mainSwiperRef.current = swiper)}
-          // controller={{ control: thumbSwiperRef.current }}
-          // onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
           onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
           className="w-full h-full"
         >
@@ -207,34 +219,20 @@ const testimonials = [
               >
                 <div className="absolute inset-0 bg-black/60"></div>
 
-                <div className="relative z-10 max-w-6xl mx-auto h-full flex items-center justify-center px-6">
-                  {/* <div className="max-w-xl text-white text-center">
-                    <h1
-                      className="font-[Syne] font-[400] tracking-[0.01em]
-        text-[20px] leading-[46px]
-        sm:text-[36px] sm:leading-[38px]
-        md:text-[42px] md:leading-[40px]
-        lg:text-[42px] lg:leading-[40px]"
-                    >
-                      {slide.heading}
-                    </h1>
+                
+                <div className="relative z-10 max-w-5xl mx-auto h-full flex flex-col items-center justify-center text-center px-6 text-white">
 
-                    <div className="flex justify-center gap-4 mt-6">
-                      <div>
-                        <p
-                          className="text-white/90 font-[Poppins] font-[400] tracking-[0.01em]
-            text-[10px] leading-[20px]
-            sm:text-[18px] sm:leading-[30px]
-            md:text-[20px] md:leading-[32px]
-            lg:text-[20px] lg:leading-[32px]"
-                          dangerouslySetInnerHTML={{
-                            __html: slide?.description,
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div> */}
-                </div>
+  <h1 className="uppercase font-bold 
+  text-[28px] sm:text-[30px] md:text-[30px] lg:text-[50px] leading-tight">
+    {slide.title}
+  </h1>
+
+  <p className="mt-4 text-white/90 
+  text-[14px] sm:text-[16px] md:text-[18px] leading-relaxed">
+    {slide.description}
+  </p>
+
+</div>
               </div>
             </SwiperSlide>
           ))}
@@ -256,248 +254,260 @@ const testimonials = [
 
           `}
         </style>
+      </section> */}
+
+       <section
+  className="hidden md:flex relative w-full h-[50vh] md:h-[85vh] bg-contain md:bg-cover bg-center bg-no-repeat items-center justify-center"
+  style={{
+    backgroundImage: "url('/Mask group.png')",
+  }}
+>
+
+  {/* Overlay optional */}
+  <div className="absolute inset-0 bg-black/10"></div>
+
+  {/* Center Text */}
+  <h1 className="relative text-white max-w-5xl mx-auto text-5xl md:text-6xl h-full flex flex-col items-center justify-center text-center font-bold tracking-wide">
+   Empowering Education, Skills, and Community Growth
+  </h1>
+
+</section>
+
+      <section
+        className="block md:hidden relative w-full  h-[50vh] sm:h-[60vh] md:h-[85vh]  bg-cover md:bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/Mask group.png')" }}
+      >
+        <div className="absolute inset-0 bg-black/10"></div>
+
+        <div className="relative z-10 max-w-6xl mx-auto h-full flex items-center px-6">
+          <div className="max-w-xl text-white">
+            
+
+            <h1 className="text-3xl md:text-5xl font-bold mb-4">Empowering Education, Skills, and Community Growth</h1>
+
+           
+          </div>
+        </div>
       </section>
-       <section>
+
+
+      <section>
         <img src="/img/image.png" className="w-full  object-cover" />
       </section>
 
-    
-<section className="max-w-6xl mx-auto px-6 mt-10 py-5">
-  <div className="text-center  py-5">
-    <h1 className="text-4xl md:text-6xl">Projects</h1>
-    <p>Building dreams since 2009</p>
+      <section className="max-w-6xl mx-auto px-6 mt-10 py-5">
+        <div className="text-center  py-5">
+          <h1 className="text-4xl md:text-6xl">Projects</h1>
+          <p>Building dreams since 2009</p>
+        </div>
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          navigation={{
+            prevEl: ".custom-prev",
+            nextEl: ".custom-next",
+          }}
+          autoplay={{ delay: 4000 }}
+          loop={true}
+          className=""
+        >
+          {slide.map((item, index) => (
+            <SwiperSlide key={index}>
+              <div className="bg-[#0A70B1] p-4 md:p-5 ">
+                <div className="grid md:grid-cols-12 gap-10 items-center">
+                  {/* LEFT IMAGE */}
+                  <div className="md:col-span-6">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-[350px] object-cover"
+                    />
+                  </div>
 
-  </div>
-  <Swiper
-    modules={[Navigation, Autoplay]}
-    navigation={{
-      prevEl: ".custom-prev",
-      nextEl: ".custom-next",
-    }}
-    autoplay={{ delay: 4000 }}
-    loop={true}
-    className=""
-  >
-    {slide.map((item, index) => (
-      <SwiperSlide key={index}>
-        <div className="bg-[#0A70B1] p-4 md:p-5 ">
-          
-          <div className="grid md:grid-cols-12 gap-10 items-center">
+                  {/* RIGHT CONTENT */}
+                  <div className="text-white md:col-span-6">
+                    <h2 className="text-3xl md:text-4xl font-bold text-lime-400 mb-4">
+                      {item.title}
+                    </h2>
 
-            {/* LEFT IMAGE */}
-            <div className="md:col-span-6">
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-[350px] object-cover"
-              />
-            </div>
+                    <p className="text-white/90 leading-relaxed mb-6">
+                      {item.description}
+                    </p>
 
-            {/* RIGHT CONTENT */}
-            <div className="text-white md:col-span-6">
-              
-              <h2 className="text-3xl md:text-4xl font-bold text-lime-400 mb-4">
-                {item.title}
-              </h2>
+                    <div className="flex gap-4 flex-wrap">
+                      {/* View Project Button */}
+                      <button className="flex items-center gap-2 bg-[#9FF01C]  text-black px-6 py-3 font-semibold hover:scale-105 transition">
+                        <span>View Project</span>
+                        <img src="/Vector (1).png" alt="" />
+                      </button>
 
-              <p className="text-white/90 leading-relaxed mb-6">
-                {item.description}
+                      {/* Download Button */}
+                      <button className="flex items-center gap-2 border  border-[#9FF01C] px-6 py-3 font-semibold hover:bg-[#9FF01C] hover:text-black transition">
+                        <img src="/Vector (2).png" alt="" />
+                        <span>Download Brochure</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        {/* Custom Navigation Buttons */}
+        <div className="flex justify-center items-center gap-2 mt-8">
+          <div className="custom-prev w-9 h-9 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition">
+            ‹
+          </div>
+
+          <div className="custom-next w-9 h-9 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition">
+            ›
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#F3F3F3] py-10">
+        <div className="max-w-6xl mx-auto px-6">
+          {/* Top Text */}
+          <p className="text-[#98C20C] font-semibold tracking-widest mb-4">
+            COMPANY
+          </p>
+
+          <h2 className="text-4xl md:text-6xl font-semibold text-black mb-16">
+            Architects of Growth
+          </h2>
+
+          {/* Cards Grid */}
+          <div className="grid md:grid-cols-12 gap-8 items-end">
+            {/* LEFT BIG CARD */}
+            <div className="md:col-span-6 bg-[#0A70B1] rounded-[40px] p-10 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
+              <p className="text-white text-lg leading-8 max-w-md">
+                Founder and visionary <br />
+                leader of Premier Group,
+                <br />
+                providing strategic
+                <br /> direction and driving the
+                <br />
+                Group’s mission of
+                <br /> purposeful, sustainable
+                <br /> growth.
               </p>
 
-              <div className="flex gap-4 flex-wrap">
-                
-                <button className="bg-[#9FF01C] text-black px-6 py-3 font-semibold hover:scale-105 transition">
-                  View Project 
-                </button>
-
-                <button className="border border-[#9FF01C] px-6 py-3 font-semibold hover:bg-[#9FF01C] hover:text-black transition">
-                  Download Brochure
-                </button>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </SwiperSlide>
-    ))}
-  </Swiper>
-  {/* Custom Navigation Buttons */}
-  <div className="flex justify-center items-center gap-2 mt-8">
-    
-    <div className="custom-prev w-9 h-9 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition">
-      ‹
-    </div>
-
-    <div className="custom-next w-9 h-9 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition">
-      ›
-    </div>
-
-  </div>
-
-</section>
-
-<section className="bg-[#F3F3F3] py-10">
-  <div className="max-w-6xl mx-auto px-6">
-
-    {/* Top Text */}
-    <p className="text-[#98C20C] font-semibold tracking-widest mb-4">
-      COMPANY
-    </p>
-
-    <h2 className="text-4xl md:text-6xl font-semibold text-black mb-16">
-      Architects of Growth
-    </h2>
-
-    {/* Cards Grid */}
-    <div className="grid md:grid-cols-12 gap-8 items-end">
-
-      {/* LEFT BIG CARD */}
-      <div className="md:col-span-6 bg-[#0A70B1] rounded-[40px] p-10 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
-
-        <p className="text-white text-lg leading-8 max-w-md">
-          Founder and visionary <br/>leader of Premier Group,<br/>
-          providing strategic<br/> direction and driving the<br/>
-          Group’s mission of<br/> purposeful, sustainable<br/> growth.
-        </p>
-
-        <img
-          src="/c1.png"
-          alt="Founder"
-          className="absolute bottom-0 right-0 h-[420px] object-contain"
-        />
-
-      </div>
-
-      {/* CENTER CARD */}
-      <div className="md:col-span-3 bg-[#0A70B1] rounded-[40px] p-8 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
-
-        <div>
-          <p className="text-lime-400 font-medium">
-            Managing Director (India)
-          </p>
-          <h3 className="text-white font-semibold mt-1">
-            FARHAN RAZA
-          </h3>
-        </div>
-
-        <img
-          src="/c2.png"
-          alt="Director"
-          className="absolute bottom-0 right-0 h-[380px] object-contain"
-        />
-
-      </div>
-
-      {/* RIGHT CARD */}
-      <div className="md:col-span-3 bg-[#0A70B1] rounded-[40px] p-8 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
-
-        <div>
-          <p className="text-lime-400 font-medium">
-            COO & MD, PG
-          </p>
-          <h3 className="text-white font-semibold mt-1">
-            Tanveer Siddiqui
-          </h3>
-        </div>
-
-        <img
-          src="/c3.png"
-          alt="COO"
-          className="absolute bottom-0 right-0 h-[380px] object-contain"
-        />
-
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
- <section className="py-20">
-  <div className="max-w-6xl mx-auto px-6">
-
-    <p className="text-[#98C20C] font-semibold tracking-widest mb-4">
-      TESTIMONIALS
-    </p>
-
-    <h2 className="text-4xl md:text-6xl font-semibold text-black mb-16">
-     Customer Reviews
-    </h2>
-
-    <Swiper
-      modules={[Navigation, Pagination]}
-      slidesPerView={1}
-      spaceBetween={30}
-      navigation={{
-        prevEl: ".test-prev",
-        nextEl: ".test-next",
-      }}
-      pagination={{
-        el: ".test-pagination",
-        clickable: true,
-        bulletClass: "custom-dot",
-        bulletActiveClass: "custom-dot-active",
-      }}
-      breakpoints={{
-        768: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
-      }}
-    >
-      {testimonials.map((item, index) => (
-        <SwiperSlide key={index}>
-          <div className="bg-white border border-[#98C20C] p-10 text-center h-full">
-            <div className="flex justify-center mb-6">
               <img
-                src={item.image}
-                alt={item.name}
-                className="w-24 h-24 rounded-full object-cover"
+                src="/c1.png"
+                alt="Founder"
+                className="absolute bottom-0 right-0 h-[420px] object-contain"
               />
             </div>
 
-            <h3 className="text-blue-600 font-semibold text-lg mb-3">
-              {item.name}
-            </h3>
+            {/* CENTER CARD */}
+            <div className="md:col-span-3 bg-[#0A70B1] rounded-[40px] p-8 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
+              <div>
+                <p className="text-lime-400 font-medium">
+                  Managing Director (India)
+                </p>
+                <h3 className="text-white font-semibold mt-1">FARHAN RAZA</h3>
+              </div>
 
-            <div className="flex justify-center mb-4">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <span key={i} className="text-[#98C20C] text-lg">
-                  {i < item.rating ? "★" : "☆"}
-                </span>
-              ))}
+              <img
+                src="/c2.png"
+                alt="Director"
+                className="absolute bottom-0 right-0 h-[380px] object-contain"
+              />
             </div>
 
-            <p className="text-gray-600 text-sm leading-6">
-              "{item.review}"
-            </p>
+            {/* RIGHT CARD */}
+            <div className="md:col-span-3 bg-[#0A70B1] rounded-[40px] p-8 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
+              <div>
+                <p className="text-lime-400 font-medium">COO & MD, PG</p>
+                <h3 className="text-white font-semibold mt-1">
+                  Tanveer Siddiqui
+                </h3>
+              </div>
+
+              <img
+                src="/c3.png"
+                alt="COO"
+                className="absolute bottom-0 right-0 h-[380px] object-contain"
+              />
+            </div>
           </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+        </div>
+      </section>
 
-    <div className="flex justify-center items-center gap-6 mt-12 tarun">
+      <section className="py-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <p className="text-[#98C20C] font-semibold tracking-widest mb-4">
+            TESTIMONIALS
+          </p>
 
-      <div className="test-prev cursor-pointer text-gray-600 text-2xl">
-        ‹
-      </div>
+          <h2 className="text-4xl md:text-6xl font-semibold text-black mb-16">
+            Customer Reviews
+          </h2>
 
-      {/* <div className="test-pagination flex items-center gap-3"></div> */}
+          <Swiper
+            modules={[Navigation, Pagination]}
+            slidesPerView={1}
+            spaceBetween={30}
+            navigation={{
+              prevEl: ".test-prev",
+              nextEl: ".test-next",
+            }}
+            pagination={{
+              el: ".test-pagination",
+              clickable: true,
+              bulletClass: "custom-dot",
+              bulletActiveClass: "custom-dot-active",
+            }}
+            breakpoints={{
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+          >
+            {testimonials.map((item, index) => (
+              <SwiperSlide key={index}>
+                <div className="bg-white border border-[#98C20C] p-10 text-center h-full">
+                  <div className="flex justify-center mb-6">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-24 h-24 rounded-full object-cover"
+                    />
+                  </div>
 
-      <div className="test-next cursor-pointer text-gray-600 text-2xl">
-        ›
-      </div>
+                  <h3 className="text-blue-600 font-semibold text-lg mb-3">
+                    {item.name}
+                  </h3>
 
-    </div>
+                  <div className="flex justify-center mb-4">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <span key={i} className="text-[#98C20C] text-lg">
+                        {i < item.rating ? "★" : "☆"}
+                      </span>
+                    ))}
+                  </div>
 
-    
+                  <p className="text-gray-600 text-sm leading-6">
+                    "{item.review}"
+                  </p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
-  </div>
-</section>
-<style>
-  {
-    `
+          <div className="flex justify-center items-center gap-6 mt-12 tarun">
+            <div className="test-prev cursor-pointer text-gray-600 text-2xl">
+              ‹
+            </div>
+
+            {/* <div className="test-pagination flex items-center gap-3"></div> */}
+
+            <div className="test-next cursor-pointer text-gray-600 text-2xl">
+              ›
+            </div>
+          </div>
+        </div>
+      </section>
+      <style>
+        {`
     .custom-dot {
   width: 8px;
   height: 8px;
@@ -510,15 +520,11 @@ const testimonials = [
   background: #555;
   transform: scale(1.2);
 }
-    `
-  }
-</style>
-
+    `}
+      </style>
 
       <section className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-12 gap-10">
-        {/* LEFT MAIN POST */}
         <div className="md:col-span-8 space-y-6">
-          {/* TOP: FIRST NEWS ITEM AS FEATURED */}
           {news.length > 0 && (
             <div
               onClick={() =>
@@ -526,7 +532,6 @@ const testimonials = [
               }
               className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6"
             >
-              {/* Left Text Side */}
               <div>
                 <h2 className="text-3xl font-bold leading-snug">
                   {news[0]?.title}
@@ -549,7 +554,6 @@ const testimonials = [
                 ></p>
               </div>
 
-              {/* Right Image Side */}
               <div>
                 <img
                   src={news[0]?.image_url}
@@ -559,7 +563,6 @@ const testimonials = [
             </div>
           )}
 
-          {/* BOTTOM GRID OF NEWS */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 pt-3">
             {news.slice(1, 4).map((item, index) => (
               <div
@@ -589,9 +592,7 @@ const testimonials = [
           </div>
         </div>
 
-        {/* RIGHT SIDEBAR */}
         <div className="md:col-span-4 space-y-10">
-          {/* Search Box */}
           <div>
             <h4 className="font-semibold mb-2">Search</h4>
             <div className="relative">
@@ -607,7 +608,6 @@ const testimonials = [
             </div>
           </div>
 
-          {/* Recent News */}
           <div>
             <h4 className="font-semibold mb-4">Recent News & Updates</h4>
             <div className="space-y-4">

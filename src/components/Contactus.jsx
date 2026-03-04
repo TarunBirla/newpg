@@ -69,33 +69,41 @@ const Contactus = () => {
       <Header />
 
       {/* TOP BANNER */}
-      <section
+      {/* <section
         className="hidden md:block relative w-full h-[90vh] bg-cover bg-center"
         style={{ backgroundImage: "url('/Mask group.png')" }}
-      ></section>
+      ></section> */}
+
+         <section
+  className="hidden md:flex relative w-full h-[50vh] md:h-[85vh] bg-contain md:bg-cover bg-center bg-no-repeat items-center justify-center"
+  style={{
+    backgroundImage: "url('/Mask group.png')",
+  }}
+>
+
+  {/* Overlay optional */}
+  <div className="absolute inset-0 bg-black/10"></div>
+
+  {/* Center Text */}
+  <h1 className="relative text-white text-5xl md:text-6xl font-bold tracking-wide">
+  CONTACT US
+  </h1>
+
+</section>
 
       <section
         className="block md:hidden relative w-full  h-[50vh] sm:h-[60vh] md:h-[85vh]  bg-cover md:bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/contact.png')" }}
+        style={{ backgroundImage: "url('/Mask group.png')" }}
       >
-        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-black/10"></div>
 
         <div className="relative z-10 max-w-6xl mx-auto h-full flex items-center px-6">
           <div className="max-w-xl text-white ">
-            <div className="flex items-center gap-2">
-              <span className="w-15 h-[2px] bg-[#40BD02]"></span>
-              <p className="text-sm text-gray-200">Contact</p>
-            </div>
+            
 
             <h1 className="text-3xl md:text-5xl font-bold mb-4">Contact Us</h1>
 
-            {/* <div className="flex gap-3 items-start">
-              <div className="w-[2px] bg-[#40BD02] h-20 mt-4"></div>
-
-              <p className="text-gray-200 leading-relaxed text-sm md:text-base max-w-md">
-               Building a future where progress meets responsibility Premier Group leads with purpose, innovation, and a commitment to sustainable growth.
-              </p>
-            </div> */}
+           
           </div>
         </div>
       </section>

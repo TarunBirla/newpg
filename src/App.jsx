@@ -7,12 +7,13 @@ import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./middleware/ProtectedRoute";
 import Home from "./components/Home";
 import Abouts from "./components/Abouts";
-import Besiness from "./components/Besiness";
+import Besiness from "./components/ProjectDetails";
 import NewUpdate from "./components/NewUpdate";
 import Contactus from "./components/Contactus";
 import NewsDetail from "./components/NewsDetail";
 import Joinus from "./components/Joinus";
 import Projects from "./components/Projects";
+import ProjectDetails from "./components/ProjectDetails";
 function App() {
   return (
     <BrowserRouter>
@@ -32,7 +33,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/abouts" element={<Abouts />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/business" element={<Besiness />} />
+        <Route path="/projectdetails" element={<ProjectDetails />} />
         <Route path="/joinus" element={<Joinus />} />
 
         <Route path="/news-updates" element={<NewUpdate />} />
