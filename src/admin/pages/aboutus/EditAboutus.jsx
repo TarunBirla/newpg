@@ -12,6 +12,12 @@ const EditAboutus = () => {
     employee_count: 0,
     nations_count: 0,
     description: "",
+    our_vision: "",
+    our_mission: "",
+    projects: "",
+    clients: "",
+    team_members: "",
+    awards: "",
   });
 
   const [photo, setPhoto] = useState(null);
@@ -35,6 +41,12 @@ const EditAboutus = () => {
           employee_count: data.employee_count,
           nations_count: data.nations_count,
           description: data.description,
+          our_vision: data.our_vision,
+          our_mission: data.our_mission,
+          projects: data.projects,
+          clients: data.clients,
+          team_members: data.team_members,
+          awards: data.awards,
         });
 
         setCurrentImage(data.image_url);
@@ -89,7 +101,7 @@ const EditAboutus = () => {
       const response = await http.put(
         `/aboutus/update?id=${id}`,
         formDataToSend,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        { headers: { "Content-Type": "multipart/form-data" } },
       );
 
       if (response.status === 200) {
@@ -172,6 +184,52 @@ const EditAboutus = () => {
               className="w-full px-3 py-2 border rounded"
             />
           </div>
+          <div>
+            <label className="text-sm">Projects Count</label>
+            <input
+              type="projects"
+              name="projects"
+              placeholder="0"
+              value={formData.projects}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="text-sm">Clients Count</label>
+            <input
+              type="clients"
+              name="clients"
+              placeholder="0"
+              value={formData.clients}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="text-sm">Team Members Count</label>
+            <input
+              type="team_members"
+              name="team_members"
+              placeholder="0"
+              value={formData.team_members}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label className="text-sm">Awards Count</label>
+            <input
+              type="awards"
+              name="awards"
+              placeholder="0"
+              value={formData.awards}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
         </div>
 
         {/* Description */}
@@ -184,6 +242,34 @@ const EditAboutus = () => {
             style={{ height: "200px" }}
             onTextChange={(e) =>
               setFormData({ ...formData, description: e.htmlValue })
+            }
+          />
+        </div>
+
+        {/* Our Vision */}
+        <div className="mb-6">
+          <label className="block text-sm text-gray-700 mb-2">
+            Our Vision <span className="text-red-500">*</span>
+          </label>
+          <Editor
+            value={formData.our_vision}
+            style={{ height: "200px" }}
+            onTextChange={(e) =>
+              setFormData({ ...formData, our_vision: e.htmlValue })
+            }
+          />
+        </div>
+
+        {/* Our Mission */}
+        <div className="mb-6">
+          <label className="block text-sm text-gray-700 mb-2">
+            Our Mission <span className="text-red-500">*</span>
+          </label>
+          <Editor
+            value={formData.our_mission}
+            style={{ height: "200px" }}
+            onTextChange={(e) =>
+              setFormData({ ...formData, our_mission: e.htmlValue })
             }
           />
         </div>

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
 
-export default function AboutusList() {
+export default function ProjectList() {
   const [entries, setEntries] = useState(10);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,7 +15,7 @@ export default function AboutusList() {
   const fetchaboutus = async () => {
     try {
       setLoading(true);
-      const res = await http.get("/aboutus");
+      const res = await http.get("/project");
       setAboutus(res.data);
       console.log(res.data);
     } catch (error) {
@@ -85,7 +85,7 @@ export default function AboutusList() {
 
     try {
       setDeleteLoadingId(id);
-      await http.delete(`/aboutus/delete`);
+      await http.delete(`/project/delete/${id}`);
 
       toast.success("about deleted successfully!");
       fetchaboutus();
@@ -154,14 +154,14 @@ export default function AboutusList() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-4 md:p-6 border-b border-gray-200">
           <h1 className="text-xl md:text-2xl font-semibold text-gray-800">
-            Aboutus List
+            Project List
           </h1>
           <button
-            onClick={() => navigate("/dashboard/aboutus/add")}
+            onClick={() => navigate("/dashboard/projects/add")}
             className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors w-full sm:w-auto justify-center"
           >
             <Plus size={18} />
-            Add Aboutus
+            Add Project
           </button>
         </div>
 
@@ -204,26 +204,9 @@ export default function AboutusList() {
                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
                   Title
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
-                  Summary
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
-                  Company Count
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
-                  Nation Count
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
-                  Employee Count
-                </th>
+
                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
                   Description
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
-                  Our Vision
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
-                  Our Mission
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
                   Photo
@@ -270,36 +253,13 @@ export default function AboutusList() {
 
                     <td
                       className="max-w-xs truncate text-sm "
-                      dangerouslySetInnerHTML={{ __html: about?.summary }}
-                    ></td>
-                    <td className="px-4 py-4 text-sm text-gray-800">
-                      {about.companies_count}
-                    </td>
-                    <td className="px-4 py-4 text-sm text-gray-800">
-                      {about.nations_count}
-                    </td>
-                    <td className="px-4 py-4 text-sm text-gray-800">
-                      {about.employee_count}
-                    </td>
-                    <td
-                      className="max-w-xs truncate text-sm "
                       dangerouslySetInnerHTML={{ __html: about?.description }}
-                    ></td>
-
-                    <td
-                      className="max-w-xs truncate text-sm "
-                      dangerouslySetInnerHTML={{ __html: about?.our_vision }}
-                    ></td>
-
-                    <td
-                      className="max-w-xs truncate text-sm "
-                      dangerouslySetInnerHTML={{ __html: about?.our_mission }}
                     ></td>
 
                     <td className="px-4 py-4">
                       <div className="image-zoom-container">
                         <img
-                          src={about.image_url}
+                          src={about.image}
                           alt={about.heading}
                           className="image-zoom h-10 w-auto object-cover"
                         />
@@ -310,7 +270,7 @@ export default function AboutusList() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() =>
-                            navigate(`/dashboard/aboutus/edit?id=${about.id}`)
+                            navigate(`/dashboard/projects/edit/${about.id}`)
                           }
                           className="bg-gray-900 cursor-pointer  text-white p-2 rounded-full hover:bg-gray-700 transition-colors"
                         >
@@ -358,28 +318,9 @@ export default function AboutusList() {
                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
                   Title
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
-                  Summary
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
-                  Company Count
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
-                  Nation Count
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
-                  Employee Count
-                </th>
 
                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
                   Description
-                </th>
-
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
-                  Our Vision
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
-                  Our Mission
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
                   Photo

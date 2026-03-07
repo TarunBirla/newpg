@@ -15,6 +15,7 @@ import {
   X,
   LayoutDashboard,
   Phone,
+  Projector,
 } from "lucide-react";
 
 const Sidebar = ({ isOpen, setIsOpen, user }) => {
@@ -126,10 +127,39 @@ const Sidebar = ({ isOpen, setIsOpen, user }) => {
     },
 
     {
+      id: "projects",
+      label: "Projects",
+      icon: Projector,
+      options: [
+        { type: "title", name: "Project Options" },
+        { name: "All Projects", link: "/dashboard/projects" },
+        { name: "Add Projects", link: "/dashboard/projects/add" },
+        // { type: "hr" },
+      ],
+    },
+
+    {
+      id: "testimonials",
+      label: "Testimonials",
+      icon: Users,
+      options: [
+        { type: "title", name: "Testimonial Options" },
+        { name: "All Testimonials", link: "/dashboard/testimonials" },
+        { name: "Add Testimonial", link: "/dashboard/testimonials/add" },
+        // { type: "hr" },
+      ],
+    },
+
+    {
       id: "contactus",
       label: "Contactus",
       icon: Phone,
-      options: [{ name: "All Contactus", link: "/dashboard/contactus" }],
+      options: [
+        { type: "title", name: "Contact Options" },
+        { name: "All Contactus", link: "/dashboard/contactus" },
+        { name: "All Inquiries", link: "/dashboard/inquiries" },
+        // { type: "hr" },
+      ],
     },
 
     {

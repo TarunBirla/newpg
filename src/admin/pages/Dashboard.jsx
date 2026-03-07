@@ -43,6 +43,13 @@ import LastdecadeList from "./lastdecade/LastdecadeList";
 import AddLastdecade from "./lastdecade/AddLastdecade";
 import EditLastdecade from "./lastdecade/EditLastdecade";
 import ContactusList from "./contactus/ContactusList";
+import AddProject from "./projects/AddProject";
+import ProjectList from "./projects/ProjectList";
+import EditProject from "./projects/EditProject";
+import TestimonialList from "./testimonials/TestimonialsList";
+import AddTestimonial from "./testimonials/AddTestimonial";
+import EditTestimonial from "./testimonials/EditTestimonial";
+import ProjectInquiryList from "./contactus/ProjectInquiryList";
 
 export default function DashboardLayout() {
   const [isOpen, setIsOpen] = useState(false);
@@ -130,6 +137,14 @@ export default function DashboardLayout() {
             <Route path="business/add" element={<AddBusiness />} />
             <Route path="business/edit/:id" element={<EditBusiness />} />
 
+            <Route path="projects" element={<ProjectList />} />
+            <Route path="projects/add" element={<AddProject />} />
+            <Route path="projects/edit/:id" element={<EditProject />} />
+
+            <Route path="testimonials" element={<TestimonialList />} />
+            <Route path="testimonials/add" element={<AddTestimonial />} />
+            <Route path="testimonials/edit/:id" element={<EditTestimonial />} />
+
             <Route path="journey" element={<JourneyList />} />
             <Route path="journey/add" element={<AddJourney />} />
             <Route path="journey/edit/:id" element={<EditJourney />} />
@@ -158,6 +173,8 @@ export default function DashboardLayout() {
             <Route path="chairmanmsg/edit/:id" element={<EditChairmanMsg />} />
 
             <Route path="contactus" element={<ContactusList />} />
+            <Route path="inquiries" element={<ProjectInquiryList />} />
+
             <Route path="settings" element={<EditSettings />} />
 
             {/* <Route path="/dashboard/users" element={<UsersPage />} /> */}

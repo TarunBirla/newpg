@@ -15,6 +15,12 @@ const AddAboutus = () => {
     nations_count: 0,
 
     description: "",
+    our_vision: "",
+    our_mission: "",
+    projects: "",
+    clients: "",
+    team_members: "",
+    awards: "",
   });
 
   const [photo, setPhoto] = useState(null);
@@ -90,6 +96,12 @@ const AddAboutus = () => {
       nations_count: 0,
 
       description: "",
+      our_vision: "",
+      our_mission: "",
+      projects: "",
+      clients: "",
+      team_members: "",
+      awards: "",
     });
 
     setPhoto(null);
@@ -173,6 +185,49 @@ const AddAboutus = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
+
+          <div>
+            <label className="text-sm">Projects Count</label>
+            <input
+              type="projects"
+              name="projects"
+              value={formData.projects}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="text-sm">Clients Count</label>
+            <input
+              type="clients"
+              name="clients"
+              value={formData.clients}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="text-sm">Team Members Count</label>
+            <input
+              type="team_members"
+              name="team_members"
+              value={formData.team_members}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label className="text-sm">Awards Count</label>
+            <input
+              type="awards"
+              name="awards"
+              value={formData.awards}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
         </div>
 
         {/* Button text */}
@@ -199,6 +254,34 @@ const AddAboutus = () => {
             style={{ height: "200px" }}
             onTextChange={(e) =>
               setFormData({ ...formData, description: e.htmlValue })
+            }
+          />
+        </div>
+
+        <div className="mb-6">
+          <label className="block text-sm text-gray-700 mb-2">
+            Our Vision <span className="text-red-500">*</span>
+          </label>
+
+          <Editor
+            value={formData.our_vision}
+            style={{ height: "200px" }}
+            onTextChange={(e) =>
+              setFormData({ ...formData, our_vision: e.htmlValue })
+            }
+          />
+        </div>
+
+        <div className="mb-6">
+          <label className="block text-sm text-gray-700 mb-2">
+            Our Mission <span className="text-red-500">*</span>
+          </label>
+
+          <Editor
+            value={formData.our_mission}
+            style={{ height: "200px" }}
+            onTextChange={(e) =>
+              setFormData({ ...formData, our_mission: e.htmlValue })
             }
           />
         </div>
