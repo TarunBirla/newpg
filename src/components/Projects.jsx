@@ -127,51 +127,52 @@ const Projects = () => {
           </div>
         </div>
         <Swiper
-          modules={[Navigation, Autoplay]}
+          modules={[Navigation, Pagination, Autoplay]}
+          slidesPerView={1}
+          spaceBetween={20}
           navigation={{
             prevEl: ".custom-prev",
             nextEl: ".custom-next",
           }}
+          pagination={{ clickable: true }}
           autoplay={{ delay: 4000 }}
           loop={true}
-          className="rounded-lg"
+          className="projectSwiper rounded-lg"
         >
           {slide.map((item, index) => (
-            <SwiperSlide key={index}>
-              <div className="bg-[#0A70B1] p-4 md:p-5 ">
-                <div className="grid md:grid-cols-12 gap-10 items-center">
+            <SwiperSlide key={index} className="h-full">
+              <div className="bg-[#0A70B1] p-4 md:p-5 h-full flex flex-col justify-between">
+                <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-center">
                   {/* LEFT IMAGE */}
                   <div className="md:col-span-6">
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="w-full h-[350px] object-cover rounded-md"
+                      className="w-full h-[220px] md:h-[350px] rounded-lg object-cover"
                     />
                   </div>
 
                   {/* RIGHT CONTENT */}
-                  <div className="text-white md:col-span-6">
-                    <h2 className="text-3xl md:text-4xl font-bold text-lime-400 mb-4">
+                  <div className="text-white md:col-span-6 flex flex-col justify-between">
+                    <h2 className="text-2xl md:text-4xl font-bold text-lime-400 mb-3">
                       {item.title}
                     </h2>
 
-                    <p className="text-white/90 leading-relaxed mb-6"
-                    dangerouslySetInnerHTML={{ __html: item.description }}
-                    >
-                    </p>
+                    <div
+                      // className="text-white/90 leading-relaxed mb-4 text-sm md:text-base"
+                      className="text-white/90 leading-relaxed mb-4 min-h-[250px]"
+                      dangerouslySetInnerHTML={{ __html: item.description }}
+                    />
 
-                    <div className="flex gap-4 flex-wrap">
-                      {/* View Project Button */}
-                                            <Link to={`/projectdetails/${item.title}`}>
-                      
-                      <button className="flex items-center gap-2 bg-[#9FF01C] rounded-md text-black px-6 py-3 font-semibold hover:scale-105 transition">
-                        <span>View Project</span>
-                        <img src="/Vector (1).png" alt="" />
-                      </button>
+                    <div className="flex gap-3 flex-wrap mt-auto">
+                      <Link to={`/projectdetails/${item.title}`}>
+                        <button className="flex items-center gap-2 bg-[#9FF01C] rounded-lg text-black px-5 py-2 font-semibold hover:scale-105 transition">
+                          <span>View Project</span>
+                          <img src="/Vector (1).png" alt="" />
+                        </button>
                       </Link>
 
-                      {/* Download Button */}
-                      <button className="flex items-center gap-2 border rounded-md border-[#9FF01C] px-6 py-3 font-semibold hover:bg-[#9FF01C] hover:text-black transition">
+                      <button className="flex items-center gap-2 rounded-lg border border-[#9FF01C] px-5 py-2 font-semibold hover:bg-[#9FF01C] hover:text-black transition">
                         <img src="/Vector (2).png" alt="" />
                         <span>Download Brochure</span>
                       </button>
@@ -183,7 +184,7 @@ const Projects = () => {
           ))}
         </Swiper>
         {/* Custom Navigation Buttons */}
-        <div className="flex justify-center items-center gap-2 mt-8">
+        <div className="hidden md:flex justify-center items-center gap-2 mt-8">
           <div className="custom-prev w-9 h-9 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition">
             ‹
           </div>
@@ -193,6 +194,27 @@ const Projects = () => {
           </div>
         </div>
       </section>
+      <style>
+        {`
+    .projectSwiper .swiper-pagination {
+  position: relative;
+  margin-top: 20px;
+}
+
+/* Mobile dots show */
+.projectSwiper .swiper-pagination {
+  display: flex;
+  justify-content: center;
+}
+
+/* Desktop dots hide */
+@media (min-width: 768px) {
+  .projectSwiper .swiper-pagination {
+    display: none;
+  }
+}
+          `}
+      </style>
 
       <Footer />
     </>

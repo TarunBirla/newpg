@@ -25,27 +25,15 @@ import { Calendar, Search } from "lucide-react";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const mainSwiperRef = useRef(null);
-  const thumbSwiperRef = useRef(null);
 
-  const sliderRef = useRef(null);
-  const scrollLeft = () => {
-    sliderRef.current.scrollBy({ left: -300, behavior: "smooth" });
-  };
-  const scrollRight = () => {
-    sliderRef.current.scrollBy({ left: 300, behavior: "smooth" });
-  };
-  const [hoverTab, setHoverTab] = useState(null);
+
+ 
 
   const [slides, setSlider] = useState([]);
   const [projects, serProjects] = useState([]);
-  const [abouts, setAbouts] = useState([]);
-  const [abouts1, setAbouts1] = useState([]);
+ 
   const [architech, setArchitech] = useState([]);
-  const [section, setSection] = useState([]);
-  const [tabsall, setTabsAll] = useState([]);
-  const [active, setActive] = useState(null);
+
   const [news, setNews] = useState([]);
   const [testimonials, setTetimoonials] = useState([]);
 
@@ -57,17 +45,11 @@ const Home = () => {
       setNews(Alldata?.news || []);
 serProjects(Alldata?.project);
       setSlider(Alldata?.banners);
-      setAbouts(Alldata?.about);
-      setAbouts1(Alldata?.chairmanmsg[0]);
+    
 setTetimoonials(Alldata?.testimonials);
       setArchitech(Alldata?.architech);
-      setSection(Alldata?.sections[0]);
-      setTabsAll(Alldata?.barSections || []);
 
-      // Set first tab active
-      if (Alldata?.barSections?.length > 0) {
-        setActive(Alldata.barSections[0].id);
-      }
+     
     } catch (err) {
       console.error("Error fetching commen data:", err);
     }
@@ -77,96 +59,7 @@ setTetimoonials(Alldata?.testimonials);
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (mainSwiperRef.current && thumbSwiperRef.current) {
-      mainSwiperRef.current.controller.control = thumbSwiperRef.current;
-      thumbSwiperRef.current.controller.control = mainSwiperRef.current;
-    }
-  }, [slides]);
-  const sliderRef1 = useRef(null);
 
-  const scrollLeft1 = () => {
-    sliderRef1.current.scrollBy({ left: -350, behavior: "smooth" });
-  };
-
-  const scrollRight1 = () => {
-    sliderRef1.current.scrollBy({ left: 350, behavior: "smooth" });
-  };
-  // const activeTab = tabsall.find((t) => t.id === active);
-  const activeTab = tabsall.find((t) => t.id === (hoverTab ?? active));
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // md breakpoint
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Show loader until data arrives
-  // if (!activeTab) {
-  //   return <div className="text-center py-10">Loading...</div>;
-  // }
-
-  const slide = [
-    {
-      image: "/slide.jpg", // apni image path
-      title: "Kalim Premier Pride",
-      description:
-        "Premier Realty’s brochure showcases our exclusive real estate projects in Kolkata, featuring modern architecture, premium amenities, and sustainable designs. It reflects our commitment to quality, innovation, and trust — offering elegant living and commercial spaces that redefine urban lifestyles in the heart of the city.",
-    },
-    {
-      image: "/slide.jpg",
-      title: "Luxury Sky Heights",
-      description:
-        "Experience a new era of luxury living with world-class amenities and prime city connectivity designed for comfort and elegance.",
-    },
-  ];
-
-  // const testimonials = [
-  //   {
-  //     image: "/t1.png",
-
-  //     name: "James Pattinson",
-  //     review:
-  //       "Lobortis leo pretium facilisis amet nisl at nec. Scelerisque risus tortor donec ipsum consequat semper consequat adipiscing ultrices.",
-  //     rating: 5,
-  //   },
-  //   {
-  //     image: "/t2.png",
-
-  //     name: "Greg Stuart",
-  //     review:
-  //       "Vestibulum, cum nam non amet consectetur morbi aenean condimentum eget. Ultricies integer nunc neque accumsan laoreet.",
-  //     rating: 5,
-  //   },
-  //   {
-  //     image: "/t3.png",
-  //     name: "Trevor Mitchell",
-  //     review:
-  //       "Ut tristique viverra sed porttitor senectus. A facilisis metus pretium ut habitant lorem. Velit vel bibendum eget aliquet sem nec.",
-  //     rating: 4,
-  //   },
-  //   {
-  //     image: "/t2.png",
-
-  //     name: "Greg Stuart",
-  //     review:
-  //       "Vestibulum, cum nam non amet consectetur morbi aenean condimentum eget. Ultricies integer nunc neque accumsan laoreet.",
-  //     rating: 5,
-  //   },
-  //   {
-  //     image: "/t3.png",
-  //     name: "Trevor Mitchell",
-  //     review:
-  //       "Ut tristique viverra sed porttitor senectus. A facilisis metus pretium ut habitant lorem. Velit vel bibendum eget aliquet sem nec.",
-  //     rating: 4,
-  //   },
-  // ];
 
   return (
     <>
@@ -252,73 +145,96 @@ setTetimoonials(Alldata?.testimonials);
           <h1 className="text-4xl md:text-6xl">Projects</h1>
           <p>Building dreams since 2009</p>
         </div>
-        <Swiper
-          modules={[Navigation, Autoplay]}
-          navigation={{
-            prevEl: ".custom-prev",
-            nextEl: ".custom-next",
-          }}
-          autoplay={{ delay: 4000 }}
-          loop={true}
-          className=""
-        >
+      <Swiper
+  modules={[Navigation, Pagination, Autoplay]}
+  navigation={{
+    prevEl: ".custom-prev",
+    nextEl: ".custom-next",
+  }}
+  pagination={{ clickable: true }}
+  autoplay={{ delay: 4000 }}
+  loop={true}
+  className="projectSwiper"
+>
           {projects.map((item, index) => (
-            <SwiperSlide key={index}>
-              <div className="bg-[#0A70B1] p-4 md:p-5 ">
-                <div className="grid md:grid-cols-12 gap-10 items-center">
-                  {/* LEFT IMAGE */}
-                  <div className="md:col-span-6">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-[350px] object-cover"
-                    />
-                  </div>
 
-                  {/* RIGHT CONTENT */}
-                  <div className="text-white md:col-span-6">
-                    <h2 className="text-3xl md:text-4xl font-bold text-lime-400 mb-4">
-                      {item.title}
-                    </h2>
+<SwiperSlide key={index} className="h-full">
+  <div className="bg-[#0A70B1] p-4 md:p-5 h-full flex flex-col justify-between">
+    <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-center">
 
-                    <p className="text-white/90 leading-relaxed mb-6"
-                    dangerouslySetInnerHTML={{ __html: item.description }}
-                    >
-                     
-                    </p>
+      {/* LEFT IMAGE */}
+      <div className="md:col-span-6">
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-full h-[220px] md:h-[350px] object-cover"
+        />
+      </div>
 
-                    <div className="flex gap-4 flex-wrap">
-                      {/* View Project Button */}
-                      <Link to={`/projectdetails/${item.title}`}>
-                     
-                      <button className="flex items-center gap-2 bg-[#9FF01C]  text-black px-6 py-3 font-semibold hover:scale-105 transition">
-                        <span>View Project</span>
-                        <img src="/Vector (1).png" alt="" />
-                      </button>
- </Link>
-                      {/* Download Button */}
-                      <button className="flex items-center gap-2 border  border-[#9FF01C] px-6 py-3 font-semibold hover:bg-[#9FF01C] hover:text-black transition">
-                        <img src="/Vector (2).png" alt="" />
-                        <span>Download Brochure</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
+      {/* RIGHT CONTENT */}
+      <div className="text-white md:col-span-6 flex flex-col justify-between">
+
+        <h2 className="text-2xl md:text-4xl font-bold text-lime-400 mb-3">
+          {item.title}
+        </h2>
+
+        <div
+          // className="text-white/90 leading-relaxed mb-4 text-sm md:text-base"
+          className="text-white/90 leading-relaxed mb-4 min-h-[250px]"
+          dangerouslySetInnerHTML={{ __html: item.description }}
+        />
+
+        <div className="flex gap-3 flex-wrap mt-auto">
+          <Link to={`/projectdetails/${item.title}`}>
+            <button className="flex items-center gap-2 bg-[#9FF01C] text-black px-5 py-2 font-semibold hover:scale-105 transition">
+              <span>View Project</span>
+              <img src="/Vector (1).png" alt="" />
+            </button>
+          </Link>
+
+          <button className="flex items-center gap-2 border border-[#9FF01C] px-5 py-2 font-semibold hover:bg-[#9FF01C] hover:text-black transition">
+            <img src="/Vector (2).png" alt="" />
+            <span>Download Brochure</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</SwiperSlide>
           ))}
         </Swiper>
-        {/* Custom Navigation Buttons */}
-        <div className="flex justify-center items-center gap-2 mt-8">
-          <div className="custom-prev w-9 h-9 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition">
-            ‹
-          </div>
+      <div className="hidden md:flex justify-center items-center gap-2 mt-8">
+  <div className="custom-prev w-9 h-9 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition">
+    ‹
+  </div>
 
-          <div className="custom-next w-9 h-9 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition">
-            ›
-          </div>
-        </div>
+  <div className="custom-next w-9 h-9 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition">
+    ›
+  </div>
+</div>
       </section>
+      <style>
+        {
+          `
+          .projectSwiper .swiper-pagination {
+  margin-top: 20px;
+  position: relative;
+}
+  /* Mobile me dots show */
+.projectSwiper .swiper-pagination {
+  display: block;
+}
+
+/* Desktop me dots hide */
+@media (min-width: 768px) {
+  .projectSwiper .swiper-pagination {
+    display: none;
+  }
+}
+          `
+        }
+      </style>
 
       <section className="bg-[#F3F3F3] py-10">
         <div className="max-w-6xl mx-auto px-6">
@@ -383,7 +299,7 @@ setTetimoonials(Alldata?.testimonials);
               />
             </div>
           </div> */}
-          <div className="grid md:grid-cols-12 gap-8 items-end">
+          <div className="hidden md:grid md:grid-cols-12 gap-8 items-end">
 
   {architech[0] && (
     <div className="md:col-span-6 bg-[#0A70B1] rounded-[40px] p-10 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
@@ -444,8 +360,74 @@ setTetimoonials(Alldata?.testimonials);
   )}
 
 </div>
+{/* Mobile Slider */}
+<div className="block md:hidden">
+
+<Swiper
+  modules={[Pagination, Autoplay]}
+  pagination={{ clickable: true }}
+  autoplay={{ delay: 3500 }}
+  loop={true}
+  className="architechSwiper"
+>
+
+  {architech.map((item, index) => (
+    <SwiperSlide key={index}>
+
+      <div className="bg-[#0A70B1] rounded-[30px] p-8 relative overflow-hidden min-h-[420px] flex flex-col justify-between">
+
+        <div>
+          <p className="text-lime-400 font-medium">
+            {item.designation}
+          </p>
+
+          <h3 className="text-white font-semibold mt-1 mb-4">
+            {item.name}
+          </h3>
+
+          <div
+            className="text-white text-sm leading-6"
+            dangerouslySetInnerHTML={{ __html: item.description }}
+          />
+        </div>
+
+        <img
+          src={item.image_url}
+          alt={item.name}
+          className="absolute bottom-0 right-0 h-[260px] object-contain"
+        />
+
+      </div>
+
+    </SwiperSlide>
+  ))}
+
+</Swiper>
+
+</div>
         </div>
       </section>
+      <style>
+        {
+          `
+          .architechSwiper .swiper-pagination {
+  position: relative;
+  margin-top: 20px;
+}
+
+.architechSwiper .swiper-pagination-bullet {
+  background: #FFF;
+  opacity: 0.5;
+}
+
+.architechSwiper .swiper-pagination-bullet-active {
+  background: #0A70B1;
+  opacity: 1;
+}
+          `
+        }
+      </style>
+
 
       <section className="py-20">
         <div className="max-w-6xl mx-auto px-6">
@@ -457,25 +439,26 @@ setTetimoonials(Alldata?.testimonials);
             Customer Reviews
           </h2>
 
-          <Swiper
-            modules={[Navigation, Pagination]}
-            slidesPerView={1}
-            spaceBetween={30}
-            navigation={{
-              prevEl: ".test-prev",
-              nextEl: ".test-next",
-            }}
-            pagination={{
-              el: ".test-pagination",
-              clickable: true,
-              bulletClass: "custom-dot",
-              bulletActiveClass: "custom-dot-active",
-            }}
-            breakpoints={{
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-          >
+        <Swiper
+  modules={[Navigation, Pagination, Autoplay]}
+  slidesPerView={1}
+  spaceBetween={30}
+  autoplay={{ delay: 3500 }}
+  navigation={{
+    prevEl: ".test-prev",
+    nextEl: ".test-next",
+  }}
+  pagination={{
+    el: ".test-pagination",
+    clickable: true,
+    bulletClass: "custom-dot",
+    bulletActiveClass: "custom-dot-active",
+  }}
+  breakpoints={{
+    768: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 },
+  }}
+>
            {testimonials.map((item, index) => (
   <SwiperSlide key={index}>
     <div className="bg-white border border-[#98C20C] p-10 text-center h-full">
@@ -511,18 +494,17 @@ setTetimoonials(Alldata?.testimonials);
   </SwiperSlide>
 ))}
           </Swiper>
+          <div className="test-pagination flex justify-center gap-3 mt-6 md:hidden"></div>
 
-          <div className="flex justify-center items-center gap-6 mt-12 tarun">
-            <div className="test-prev cursor-pointer text-gray-600 text-2xl">
-              ‹
-            </div>
+          <div className="hidden md:flex justify-center items-center gap-6 mt-12">
+  <div className="test-prev cursor-pointer text-gray-600 text-2xl">
+    ‹
+  </div>
 
-            {/* <div className="test-pagination flex items-center gap-3"></div> */}
-
-            <div className="test-next cursor-pointer text-gray-600 text-2xl">
-              ›
-            </div>
-          </div>
+  <div className="test-next cursor-pointer text-gray-600 text-2xl">
+    ›
+  </div>
+</div>
         </div>
       </section>
       <style>
@@ -536,7 +518,7 @@ setTetimoonials(Alldata?.testimonials);
 }
 
 .custom-dot-active {
-  background: #555;
+  background: #0A70B1;
   transform: scale(1.2);
 }
     `}
