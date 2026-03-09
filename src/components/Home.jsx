@@ -38,7 +38,8 @@ const Home = () => {
   };
   const [hoverTab, setHoverTab] = useState(null);
 
-  // const [slides, setSlider] = useState([]);
+  const [slides, setSlider] = useState([]);
+  const [projects, serProjects] = useState([]);
   const [abouts, setAbouts] = useState([]);
   const [abouts1, setAbouts1] = useState([]);
   const [architech, setArchitech] = useState([]);
@@ -46,32 +47,19 @@ const Home = () => {
   const [tabsall, setTabsAll] = useState([]);
   const [active, setActive] = useState(null);
   const [news, setNews] = useState([]);
+  const [testimonials, setTetimoonials] = useState([]);
 
-   const slides = [
-    {
-      image_url: "/Mask group.png", // apni image path
-      title: "Empowering Education, Skills, and Community Growth",
-      description:
-        "A Visionary Integrated Township Project in Sonarpur, West Bengal",
-    },
-    {
-      image_url: "/Mask group.png",
-      title: "Luxury Sky Heights",
-      description:
-        "Experience a new era of luxury living with world-class amenities and prime city connectivity designed for comfort and elegance.",
-    },
-  ];
   const fetchData = async () => {
     try {
       const response = await http.get(`/common`);
       console.log("Fetched data:", response.data);
       const Alldata = response.data?.data;
       setNews(Alldata?.news || []);
-
-      // setSlider(Alldata?.banners);
+serProjects(Alldata?.project);
+      setSlider(Alldata?.banners);
       setAbouts(Alldata?.about);
       setAbouts1(Alldata?.chairmanmsg[0]);
-
+setTetimoonials(Alldata?.testimonials);
       setArchitech(Alldata?.architech);
       setSection(Alldata?.sections[0]);
       setTabsAll(Alldata?.barSections || []);
@@ -139,157 +127,121 @@ const Home = () => {
     },
   ];
 
-  
+  // const testimonials = [
+  //   {
+  //     image: "/t1.png",
 
-  const testimonials = [
-    {
-      image: "/t1.png",
+  //     name: "James Pattinson",
+  //     review:
+  //       "Lobortis leo pretium facilisis amet nisl at nec. Scelerisque risus tortor donec ipsum consequat semper consequat adipiscing ultrices.",
+  //     rating: 5,
+  //   },
+  //   {
+  //     image: "/t2.png",
 
-      name: "James Pattinson",
-      review:
-        "Lobortis leo pretium facilisis amet nisl at nec. Scelerisque risus tortor donec ipsum consequat semper consequat adipiscing ultrices.",
-      rating: 5,
-    },
-    {
-      image: "/t2.png",
+  //     name: "Greg Stuart",
+  //     review:
+  //       "Vestibulum, cum nam non amet consectetur morbi aenean condimentum eget. Ultricies integer nunc neque accumsan laoreet.",
+  //     rating: 5,
+  //   },
+  //   {
+  //     image: "/t3.png",
+  //     name: "Trevor Mitchell",
+  //     review:
+  //       "Ut tristique viverra sed porttitor senectus. A facilisis metus pretium ut habitant lorem. Velit vel bibendum eget aliquet sem nec.",
+  //     rating: 4,
+  //   },
+  //   {
+  //     image: "/t2.png",
 
-      name: "Greg Stuart",
-      review:
-        "Vestibulum, cum nam non amet consectetur morbi aenean condimentum eget. Ultricies integer nunc neque accumsan laoreet.",
-      rating: 5,
-    },
-    {
-      image: "/t3.png",
-      name: "Trevor Mitchell",
-      review:
-        "Ut tristique viverra sed porttitor senectus. A facilisis metus pretium ut habitant lorem. Velit vel bibendum eget aliquet sem nec.",
-      rating: 4,
-    },
-    {
-      image: "/t2.png",
-
-      name: "Greg Stuart",
-      review:
-        "Vestibulum, cum nam non amet consectetur morbi aenean condimentum eget. Ultricies integer nunc neque accumsan laoreet.",
-      rating: 5,
-    },
-    {
-      image: "/t3.png",
-      name: "Trevor Mitchell",
-      review:
-        "Ut tristique viverra sed porttitor senectus. A facilisis metus pretium ut habitant lorem. Velit vel bibendum eget aliquet sem nec.",
-      rating: 4,
-    },
-  ];
+  //     name: "Greg Stuart",
+  //     review:
+  //       "Vestibulum, cum nam non amet consectetur morbi aenean condimentum eget. Ultricies integer nunc neque accumsan laoreet.",
+  //     rating: 5,
+  //   },
+  //   {
+  //     image: "/t3.png",
+  //     name: "Trevor Mitchell",
+  //     review:
+  //       "Ut tristique viverra sed porttitor senectus. A facilisis metus pretium ut habitant lorem. Velit vel bibendum eget aliquet sem nec.",
+  //     rating: 4,
+  //   },
+  // ];
 
   return (
     <>
       <Header />
 
-      {/* <section className="relative w-full  h-[50vh] sm:h-[80vh] md:h-[90vh] ">
+      <section className="hidden md:flex relative w-full h-[50vh] md:h-[85vh] bg-contain md:bg-cover bg-center bg-no-repeat items-center justify-center">
         <Swiper
-          modules={[Navigation, Pagination, Thumbs, Controller, Autoplay]}
-          navigation={false}
-          // pagination={false}
-          pagination={
-            isMobile
-              ? {
-                  clickable: true,
-                }
-              : false
-          }
-          effect="fade"
-          fadeEffect={{ crossFade: true }}
-          loop={true}
+          modules={[Autoplay, Pagination]}
           autoplay={{
-            delay: 1000,
+            delay: 4000,
             disableOnInteraction: false,
-            pauseOnMouseEnter: true,
           }}
-          speed={900}
-          onSwiper={(swiper) => (mainSwiperRef.current = swiper)}
-          onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
+          loop={true}
+          pagination={{ clickable: true }}
           className="w-full h-full"
         >
-          {slides.map((slide, index) => (
-            <SwiperSlide key={slide.id ?? index}>
+          {slides?.map((slide, index) => (
+            <SwiperSlide key={index}>
               <div
-                className="relative w-full h-full bg-cover bg-center"
-                style={{ backgroundImage: `url(${slide.image_url})` }}
+                className="relative w-full h-[55vh] md:h-[90vh] bg-cover bg-center flex items-center justify-center"
+                style={{
+                  backgroundImage: `url(${slide.image_url})`,
+                }}
               >
-                <div className="absolute inset-0 bg-black/60"></div>
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/40"></div>
 
-                
-                <div className="relative z-10 max-w-5xl mx-auto h-full flex flex-col items-center justify-center text-center px-6 text-white">
+                {/* Text Content */}
+                <div className="relative z-10 text-center text-white px-6 max-w-5xl">
+                  <h1 className="text-3xl md:text-6xl font-bold mb-4">
+                    {slide.heading}
+                  </h1>
 
-  <h1 className="uppercase font-bold 
-  text-[28px] sm:text-[30px] md:text-[30px] lg:text-[50px] leading-tight">
-    {slide.title}
-  </h1>
-
-  <p className="mt-4 text-white/90 
-  text-[14px] sm:text-[16px] md:text-[18px] leading-relaxed">
-    {slide.description}
-  </p>
-
-</div>
+                  <div
+                    className="text-sm md:text-lg opacity-90"
+                    dangerouslySetInnerHTML={{ __html: slide.description }}
+                  ></div>
+                </div>
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
-
-        <style>
-          {`
-                  @media (max-width: 768px) {
-                  .swiper-pagination-bullet {
-                    background: white;
-                    opacity: 0.6;
-                  }
-
-                  .swiper-pagination-bullet-active {
-                    background: #C1FF00;
-                    opacity: 1;
-                  }
-                }
-
-          `}
-        </style>
-      </section> */}
-
-       <section
-  className="hidden md:flex relative w-full h-[50vh] md:h-[85vh] bg-contain md:bg-cover bg-center bg-no-repeat items-center justify-center"
-  style={{
-    backgroundImage: "url('/Mask group.png')",
-  }}
->
-
-  {/* Overlay optional */}
-  <div className="absolute inset-0 bg-black/10"></div>
-
-  {/* Center Text */}
-  <h1 className="relative text-white max-w-5xl mx-auto text-5xl md:text-6xl h-full flex flex-col items-center justify-center text-center font-bold tracking-wide">
-   Empowering Education, Skills, and Community Growth
-  </h1>
-
-</section>
-
-      <section
-        className="block md:hidden relative w-full  h-[50vh] sm:h-[60vh] md:h-[85vh]  bg-cover md:bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/Mask group.png')" }}
-      >
-        <div className="absolute inset-0 bg-black/10"></div>
-
-        <div className="relative z-10 max-w-6xl mx-auto h-full flex items-center px-6">
-          <div className="max-w-xl text-white">
-            
-
-            <h1 className="text-3xl md:text-5xl font-bold mb-4">Empowering Education, Skills, and Community Growth</h1>
-
-           
-          </div>
-        </div>
       </section>
 
+      <section className="block md:hidden relative w-full h-[50vh] sm:h-[60vh] overflow-hidden">
+        <Swiper
+          modules={[Autoplay, Pagination]}
+          autoplay={{
+            delay: 3500,
+            disableOnInteraction: false,
+          }}
+          loop={true}
+          pagination={{ clickable: true }}
+          className="w-full h-full"
+        >
+          {slides?.map((slide) => (
+            <SwiperSlide key={slide.id}>
+              <div
+                className="relative w-full h-[50vh] sm:h-[60vh] bg-cover bg-center flex items-center"
+                style={{ backgroundImage: `url(${slide.image_url})` }}
+              >
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/20"></div>
+
+                {/* Text */}
+                <div className="relative z-10 max-w-6xl mx-auto px-6">
+                  <div className="max-w-xl text-white">
+                    <h1 className="text-3xl font-bold mb-4">{slide.heading}</h1>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
 
       <section>
         <img src="/img/image.png" className="w-full  object-cover" />
@@ -310,7 +262,7 @@ const Home = () => {
           loop={true}
           className=""
         >
-          {slide.map((item, index) => (
+          {projects.map((item, index) => (
             <SwiperSlide key={index}>
               <div className="bg-[#0A70B1] p-4 md:p-5 ">
                 <div className="grid md:grid-cols-12 gap-10 items-center">
@@ -329,17 +281,21 @@ const Home = () => {
                       {item.title}
                     </h2>
 
-                    <p className="text-white/90 leading-relaxed mb-6">
-                      {item.description}
+                    <p className="text-white/90 leading-relaxed mb-6"
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                    >
+                     
                     </p>
 
                     <div className="flex gap-4 flex-wrap">
                       {/* View Project Button */}
+                      <Link to={`/projectdetails/${item.title}`}>
+                     
                       <button className="flex items-center gap-2 bg-[#9FF01C]  text-black px-6 py-3 font-semibold hover:scale-105 transition">
                         <span>View Project</span>
                         <img src="/Vector (1).png" alt="" />
                       </button>
-
+ </Link>
                       {/* Download Button */}
                       <button className="flex items-center gap-2 border  border-[#9FF01C] px-6 py-3 font-semibold hover:bg-[#9FF01C] hover:text-black transition">
                         <img src="/Vector (2).png" alt="" />
@@ -376,8 +332,7 @@ const Home = () => {
           </h2>
 
           {/* Cards Grid */}
-          <div className="grid md:grid-cols-12 gap-8 items-end">
-            {/* LEFT BIG CARD */}
+          {/* <div className="grid md:grid-cols-12 gap-8 items-end">
             <div className="md:col-span-6 bg-[#0A70B1] rounded-[40px] p-10 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
               <p className="text-white text-lg leading-8 max-w-md">
                 Founder and visionary <br />
@@ -398,7 +353,6 @@ const Home = () => {
               />
             </div>
 
-            {/* CENTER CARD */}
             <div className="md:col-span-3 bg-[#0A70B1] rounded-[40px] p-8 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
               <div>
                 <p className="text-lime-400 font-medium">
@@ -414,7 +368,6 @@ const Home = () => {
               />
             </div>
 
-            {/* RIGHT CARD */}
             <div className="md:col-span-3 bg-[#0A70B1] rounded-[40px] p-8 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
               <div>
                 <p className="text-lime-400 font-medium">COO & MD, PG</p>
@@ -429,7 +382,68 @@ const Home = () => {
                 className="absolute bottom-0 right-0 h-[380px] object-contain"
               />
             </div>
-          </div>
+          </div> */}
+          <div className="grid md:grid-cols-12 gap-8 items-end">
+
+  {architech[0] && (
+    <div className="md:col-span-6 bg-[#0A70B1] rounded-[40px] p-10 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
+
+      <div
+        className="text-white text-lg leading-8 max-w-md"
+        dangerouslySetInnerHTML={{
+          __html: architech[0].description,
+        }}
+      />
+
+      <img
+        src={architech[0].image_url}
+        alt={architech[0].name}
+        className="absolute bottom-0 right-0 h-[420px] object-contain"
+      />
+    </div>
+  )}
+
+  {architech[2] && (
+    <div className="md:col-span-3 bg-[#0A70B1] rounded-[40px] p-8 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
+
+      <div>
+        <p className="text-lime-400 font-medium">
+          {architech[2].designation}
+        </p>
+        <h3 className="text-white font-semibold mt-1">
+          {architech[2].name}
+        </h3>
+      </div>
+
+      <img
+        src={architech[2].image_url}
+        alt={architech[2].name}
+        className="absolute bottom-0 right-0 h-[380px] object-contain"
+      />
+    </div>
+  )}
+
+  {architech[1] && (
+    <div className="md:col-span-3 bg-[#0A70B1] rounded-[40px] p-8 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
+
+      <div>
+        <p className="text-lime-400 font-medium">
+          {architech[1].designation}
+        </p>
+        <h3 className="text-white font-semibold mt-1">
+          {architech[1].name}
+        </h3>
+      </div>
+
+      <img
+        src={architech[1].image_url}
+        alt={architech[1].name}
+        className="absolute bottom-0 right-0 h-[380px] object-contain"
+      />
+    </div>
+  )}
+
+</div>
         </div>
       </section>
 
@@ -462,35 +476,40 @@ const Home = () => {
               1024: { slidesPerView: 3 },
             }}
           >
-            {testimonials.map((item, index) => (
-              <SwiperSlide key={index}>
-                <div className="bg-white border border-[#98C20C] p-10 text-center h-full">
-                  <div className="flex justify-center mb-6">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-24 h-24 rounded-full object-cover"
-                    />
-                  </div>
+           {testimonials.map((item, index) => (
+  <SwiperSlide key={index}>
+    <div className="bg-white border border-[#98C20C] p-10 text-center h-full">
 
-                  <h3 className="text-blue-600 font-semibold text-lg mb-3">
-                    {item.name}
-                  </h3>
+      <div className="flex justify-center mb-6">
+        <img
+          src={item.image}
+          alt={item.name}
+          className="w-24 h-24 rounded-full object-cover"
+        />
+      </div>
 
-                  <div className="flex justify-center mb-4">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <span key={i} className="text-[#98C20C] text-lg">
-                        {i < item.rating ? "★" : "☆"}
-                      </span>
-                    ))}
-                  </div>
+      <h3 className="text-blue-600 font-semibold text-lg mb-3">
+        {item.name}
+      </h3>
 
-                  <p className="text-gray-600 text-sm leading-6">
-                    "{item.review}"
-                  </p>
-                </div>
-              </SwiperSlide>
-            ))}
+      {/* Rating */}
+      <div className="flex justify-center mb-4">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <span key={i} className="text-[#98C20C] text-lg">
+            {i < item.rating ? "★" : "☆"}
+          </span>
+        ))}
+      </div>
+
+      {/* Message */}
+      <div
+        className="text-gray-600 text-sm leading-6"
+        dangerouslySetInnerHTML={{ __html: item.message }}
+      />
+
+    </div>
+  </SwiperSlide>
+))}
           </Swiper>
 
           <div className="flex justify-center items-center gap-6 mt-12 tarun">

@@ -14,6 +14,7 @@ import NewsDetail from "./components/NewsDetail";
 import Joinus from "./components/Joinus";
 import Projects from "./components/Projects";
 import ProjectDetails from "./components/ProjectDetails";
+import ScrollToTop from "./service/ScrollToTop";
 function App() {
   return (
     <BrowserRouter>
@@ -27,13 +28,14 @@ function App() {
         draggable
         theme="light"
       />
+      <ScrollToTop />
 
       <Routes>
         {/* <Route path="/" element={<LandingPage />} /> */}
         <Route path="/" element={<Home />} />
         <Route path="/abouts" element={<Abouts />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/projectdetails" element={<ProjectDetails />} />
+        <Route path="/projectdetails/:title" element={<ProjectDetails />} />
         <Route path="/joinus" element={<Joinus />} />
 
         <Route path="/news-updates" element={<NewUpdate />} />

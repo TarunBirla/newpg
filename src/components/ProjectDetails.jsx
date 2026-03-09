@@ -3,8 +3,10 @@ import Header from "./Header";
 import Footer from "./Footer";
 import http from "../service/http";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 const ProjectDetails = () => {
+  const {title} = useParams();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -62,7 +64,7 @@ const ProjectDetails = () => {
 
         {/* Center Text */}
         <h1 className="relative text-[#9FF01C] text-5xl md:text-6xl font-bold tracking-wide uppercase ">
-          Kalim Premier Pride
+         {title}
         </h1>
       </section>
       <section>

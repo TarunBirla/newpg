@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <header
       className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 
-      ${isScrolled ? "transparent shadow-lg" : "bg-black/10 shadow-lg"}`}
+      ${isScrolled ? " bg-white text-black shadow-lg" : "transparent text-white"}`}
     >
       <div className="relative max-w-6xl mx-auto flex items-center px-4 py-3">
         {/* LEFT: LOGO */}
@@ -40,7 +40,7 @@ const Header = () => {
         </div>
 
         {/* CENTER: NAV */}
-        <nav className="hidden md:flex text-sm  absolute left-1/2 -translate-x-1/2 items-center space-x-6 text-white uppercase bg-transparent px-5 py-3 font-medium">
+        <nav className="hidden md:flex text-sm  absolute left-1/2 -translate-x-1/2 items-center space-x-6  uppercase bg-transparent px-5 py-3 font-medium">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -91,7 +91,7 @@ const Header = () => {
         <div className="ml-auto hidden md:block">
           <div className="flex gap-5">
             <Link
-              to="/projectdetails"
+              to="/contact"
               className="px-5 py-2 text-white font-semibold 
         bg-gradient-to-r from-[#40BD02] to-[#37B8E1] 
         hover:scale-105 transition"

@@ -44,20 +44,16 @@ const Footer = () => {
                   </li>
                   <li className="hover:text-[#40BD02] cursor-pointer">
                     {" "}
-                    <Link to="/a">About Us</Link>
+                    <Link to="/abouts">About Us</Link>
                   </li>
                   <li className="hover:text-[#40BD02] cursor-pointer">
                     {" "}
-                    <Link to="/p">Projects</Link>
+                    <Link to="/projects">Projects</Link>
                   </li>
 
                   <li className="hover:text-[#40BD02] cursor-pointer">
                     {" "}
-                    <Link to="/j">Join Us</Link>
-                  </li>
-                  <li className="hover:text-[#40BD02] cursor-pointer">
-                    {" "}
-                    <Link to="/news-updates">News & Updates</Link>
+                    <Link to="/news-updates">Blog</Link>
                   </li>
                   <li className="hover:text-[#40BD02] cursor-pointer">
                     {" "}

@@ -5,6 +5,25 @@ import http from "../service/http";
 import JourneyTimeline from "./JourneyTimeline";
 
 const Abouts = () => {
+    const [abouts, setAbouts] = useState([]);
+    
+  
+    const fetchData = async () => {
+      try {
+        const response = await http.get(`/common`);
+        console.log("Fetched data:", response.data);
+        const Alldata = response.data?.data;
+      
+        setAbouts(Alldata?.about);
+  
+        
+      } catch (err) {
+        console.error("Error fetching commen data:", err);
+      }
+    };
+    useEffect(() => {
+        fetchData();
+      }, []);
   return (
     <>
       <Header />
@@ -61,36 +80,26 @@ const Abouts = () => {
             </p>
 
             <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
-              Building Dreams,
-              <br />
-              Shaping Skylines
+             {abouts?.title}
             </h2>
           </div>
 
           {/* RIGHT CONTENT */}
           <div>
-            <p className="text-gray-800 text-lg leading-relaxed italic">
-              “Transforming West Bengal into a hub of education and empowerment,
-              Premier Knowledge City is designed to inspire progress and elevate
-              lifestyles.”
+            <p className="text-gray-800 text-lg leading-relaxed italic"
+                    dangerouslySetInnerHTML={{ __html: abouts?.summary }}
+            >
+           
             </p>
           </div>
         </div>
         <div className="relative max-w-6xl mx-auto px-6 mb-12">
-          <p className="text-gray-700 leading-relaxed">
-            At Premier Realty, we don’t just build structures—we create
-            landmarks that define lifestyles. As one of the most trusted names
-            in real estate in Kolkata, Premier Realty is dedicated to delivering
-            exceptional homes and commercial spaces that reflect quality,
-            integrity, and innovation.
+          <p className="text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: abouts?.description }}
+          >
+
           </p>
-          <p className="mt-6 text-gray-700 leading-relaxed">
-            With a strong legacy of excellence under the Premier Group, we
-            combine decades of industry experience with a forward-thinking
-            approach to redefine modern living. Every project we undertake is a
-            testament to our unwavering commitment to craftsmanship, customer
-            satisfaction, and sustainability.
-          </p>
+         
         </div>
       </section>
       <section className=" py-16 ">
@@ -131,12 +140,10 @@ const Abouts = () => {
 
       {/* ================= CONTENT BOX ================= */}
       <div className="bg-[#0A70B1] text-white p-12 rounded-2xl shadow-2xl flex-1">
-        <p className="text-lg leading-relaxed">
-          Our vision is to be the most trusted and preferred real estate
-          developer in Kolkata, creating spaces that inspire lifestyles,
-          empower communities, and stand the test of time. We aim to blend
-          innovation, sustainability, and quality to shape the city’s skyline
-          with integrity and lasting value.
+        <p className="text-lg leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: abouts?.our_vision }}
+        >
+
         </p>
       </div>
 
@@ -161,23 +168,11 @@ const Abouts = () => {
 
             {/* Content Box */}
             <div className=" bg-[#1f6fa5] text-white p-10 rounded-xl shadow-xl w-full">
-              <ul className="space-y-4 list-disc pl-6 text-lg">
-                <li>
-                  To design and deliver world-class residential and commercial
-                  projects.
-                </li>
-                <li>
-                  To integrate innovation and sustainability into every stage of
-                  development.
-                </li>
-                <li>
-                  To ensure transparency, trust, and long-term value for every
-                  client.
-                </li>
-                <li>
-                  To contribute to Kolkata’s urban transformation with modern,
-                  responsible development.
-                </li>
+              <ul className="space-y-4 list-disc pl-6 text-lg"
+                    dangerouslySetInnerHTML={{ __html: abouts?.our_mission }}
+
+              >
+               
               </ul>
             </div>
           </div>
@@ -197,28 +192,29 @@ const Abouts = () => {
         <div className="relative max-w-6xl mx-auto w-full px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 text-center text-white gap-8">
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold">10+</h2>
+            
+              <h2 className="text-4xl md:text-5xl font-bold">  {abouts?.companies_count} +</h2>
               <p className="uppercase tracking-widest text-sm mt-2">
                 Projects Ongoing
               </p>
             </div>
 
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold">1,200+</h2>
+              <h2 className="text-4xl md:text-5xl font-bold">{abouts?.clients}+</h2>
               <p className="uppercase tracking-widest text-sm mt-2">
                 Happy Clients
               </p>
             </div>
 
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold">85+</h2>
+              <h2 className="text-4xl md:text-5xl font-bold">{abouts?.employee_count}+</h2>
               <p className="uppercase tracking-widest text-sm mt-2">
                 Team Members
               </p>
             </div>
 
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold">6</h2>
+              <h2 className="text-4xl md:text-5xl font-bold">{abouts?.awards}+</h2>
               <p className="uppercase tracking-widest text-sm mt-2">
                 Awards Won
               </p>

@@ -3,7 +3,7 @@ import { Calendar, Search, Instagram, Linkedin } from "lucide-react";
 import Header from "./Header";
 import Footer from "./Footer";
 import http from "../service/http";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Navigation,
@@ -18,13 +18,13 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 
 const Projects = () => {
-  const [news, setNews] = useState([]);
+  const [slide, setSlider] = useState([]);
 
   const fetchData = async () => {
     try {
       const response = await http.get(`/common`);
       const Alldata = response.data?.data;
-      setNews(Alldata?.news || []);
+      setSlider(Alldata?.project || []);
     } catch (err) {
       console.error("Error fetching common data:", err);
     }
@@ -36,20 +36,20 @@ const Projects = () => {
 
   const navigate = useNavigate();
 
-  const slide = [
-    {
-      image: "/slide.jpg", // apni image path
-      title: "Kalim Premier Pride",
-      description:
-        "Premier Realty’s brochure showcases our exclusive real estate projects in Kolkata, featuring modern architecture, premium amenities, and sustainable designs. It reflects our commitment to quality, innovation, and trust — offering elegant living and commercial spaces that redefine urban lifestyles in the heart of the city.",
-    },
-    {
-      image: "/slide.jpg",
-      title: "Luxury Sky Heights",
-      description:
-        "Experience a new era of luxury living with world-class amenities and prime city connectivity designed for comfort and elegance.",
-    },
-  ];
+  // const slide = [
+  //   {
+  //     image: "/slide.jpg", // apni image path
+  //     title: "Kalim Premier Pride",
+  //     description:
+  //       "Premier Realty’s brochure showcases our exclusive real estate projects in Kolkata, featuring modern architecture, premium amenities, and sustainable designs. It reflects our commitment to quality, innovation, and trust — offering elegant living and commercial spaces that redefine urban lifestyles in the heart of the city.",
+  //   },
+  //   {
+  //     image: "/slide.jpg",
+  //     title: "Luxury Sky Heights",
+  //     description:
+  //       "Experience a new era of luxury living with world-class amenities and prime city connectivity designed for comfort and elegance.",
+  //   },
+  // ];
   return (
     <>
       <Header />
@@ -59,24 +59,22 @@ const Projects = () => {
         className="hidden md:block relative w-full h-[85vh] bg-cover bg-center"
         style={{ backgroundImage: "url('/Mask group.png')" }}
       /> */}
-         <section
-  className="hidden md:flex relative w-full h-[50vh] md:h-[85vh] bg-contain md:bg-cover bg-center bg-no-repeat items-center justify-center"
-  style={{
-    backgroundImage: "url('/Mask group.png')",
-  }}
->
+      <section
+        className="hidden md:flex relative w-full h-[50vh] md:h-[85vh] bg-contain md:bg-cover bg-center bg-no-repeat items-center justify-center"
+        style={{
+          backgroundImage: "url('/Mask group.png')",
+        }}
+      >
+        {/* Overlay optional */}
+        <div className="absolute inset-0 bg-black/10"></div>
 
-  {/* Overlay optional */}
-  <div className="absolute inset-0 bg-black/10"></div>
+        {/* Center Text */}
+        <h1 className="relative text-white text-5xl md:text-6xl font-bold tracking-wide">
+          PROJECTS
+        </h1>
+      </section>
 
-  {/* Center Text */}
-  <h1 className="relative text-white text-5xl md:text-6xl font-bold tracking-wide">
-    PROJECTS
-  </h1>
-
-</section>
-
-     <section
+      <section
         className="block md:hidden relative w-full  h-[50vh] sm:h-[60vh] md:h-[85vh]  bg-cover md:bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/Mask group.png')" }}
       >
@@ -84,11 +82,7 @@ const Projects = () => {
 
         <div className="relative z-10 max-w-6xl mx-auto h-full flex items-center px-6">
           <div className="max-w-xl text-white">
-            
-
             <h1 className="text-3xl md:text-5xl font-bold mb-4">Projects</h1>
-
-           
           </div>
         </div>
       </section>
@@ -161,16 +155,20 @@ const Projects = () => {
                       {item.title}
                     </h2>
 
-                    <p className="text-white/90 leading-relaxed mb-6">
-                      {item.description}
+                    <p className="text-white/90 leading-relaxed mb-6"
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                    >
                     </p>
 
                     <div className="flex gap-4 flex-wrap">
                       {/* View Project Button */}
+                                            <Link to={`/projectdetails/${item.title}`}>
+                      
                       <button className="flex items-center gap-2 bg-[#9FF01C] rounded-md text-black px-6 py-3 font-semibold hover:scale-105 transition">
                         <span>View Project</span>
                         <img src="/Vector (1).png" alt="" />
                       </button>
+                      </Link>
 
                       {/* Download Button */}
                       <button className="flex items-center gap-2 border rounded-md border-[#9FF01C] px-6 py-3 font-semibold hover:bg-[#9FF01C] hover:text-black transition">
